@@ -10,7 +10,7 @@ server.listen(4444);
 describe('server/app.js', function() {
   this.timeout(5000);
   beforeEach((done) => {
-    
+
     done();
   });
 
@@ -37,4 +37,14 @@ describe('server/app.js', function() {
       done();
     });
   });
+
+  it('page says hello world', (done) => {
+    chai.request(server)
+      .get('/')
+      .end((err, res) => {
+        expect(err).not.exist;
+        expect(JSON.stringify(res.text)).to.contain('Wazzup');
+        done();
+      });
+    });
 })
